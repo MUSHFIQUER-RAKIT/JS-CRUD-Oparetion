@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Data Entry</title>
+
+  <!--css link  -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+<body>
+  <header>
+    <nav class="navbar navbar-dark  bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="#">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header justify-content-between">
+
+
+            <button type="button" class="btn float-start btn-outline-primary text-reset" data-bs-dismiss="offcanvas"
+              aria-label="Close">X</button>
+
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              Admin Panel</h5>
+
+          </div>
+          <div class="offcanvas-body">
+            <ul class="nav flex-column ">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Student Data</a>
+              </li>
+            </ul>
+            <button type="button" class="btn btn-outline-primary ms-3">Login</button>
+
+          </div>
+        </div>
+
+
+      </div>
+    </nav>
+
+
+  </header>
+  <section class="mt-5 mb-5">
+    <div class="container">
+      <form>
+        <h5>Application form for Event</h5>
+        <div class="row form-row">
+          <div class="col-md-6 mb-3">
+            <label for="fName" class="form-label">First name</label>
+            <input type="text" class="form-control" id="fName" placeholder="First name" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lName" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="lName" placeholder="Last name" required>
+          </div>
+
+        </div>
+        <div class="row form-row">
+          <div class="col-md-6 mb-3">
+            <label for="" class="form-label">Divison</label>
+            <select class="form-select form-select-lg" name="" id="">
+              <option selected>Khulna</option>
+              <option value="">Dhaka</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="" class="form-label">District</label>
+            <select class="form-select form-select-lg" name="" id="">
+              <option selected>Meherpur</option>
+              <option value="">Dhaka</option>
+            </select>
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-6 mb-3">
+            <label for="rollNumber" class="form-label">Enter Roll Number</label>
+            <input type="number" class="form-control" id="rollNumber" placeholder="rollNumber">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="regNumber" class="form-label">Enter Registation Number</label>
+            <input type="number" class="form-control" id="regNumber" placeholder="regNumber" required>
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-6 mb-3">
+            <label for="" class="form-label">Class</label>
+            <select class="form-select form-select-lg" name="" id="">
+              <option selected>Selete</option>
+              <option value="">10</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="" class="form-label">Subject</label>
+            <select class="form-select form-select-lg" name="" id="">
+              <option selected>selete</option>
+              <option value="">Science</option>
+              <option value="">Humanities</option>
+            </select>
+          </div>
+        </div>
+        <h6 class="row">✅Plaese Fill The Form Correctly</h6>
+
+        <input type="reset" value="reset" id="resetForm" class="btn btn-danger float-end">
+        <input type="button" value="Submit" id="formButton" onclick="subFunction()"
+          class="btn btn-primary float-end me-2">
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <hr>
+    <div class="container table-responsive">
+      <div id="alert" class="row">
+        <div class="col align-content-end">
+          <h3 class="text-success py-4">Student Data List</h3>
+        </div>
+        <div class="col">
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong>Holy guacamole!</strong>
+          </div>
+        </div>
+      </div>
+      <table class="table table-primary">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Roll</th>
+            <th scope="col">Registation</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody id="table">
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+
+  <!-- JS LINK   -->
+  <script src="Z_JS_CRUD.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+
+</html>
