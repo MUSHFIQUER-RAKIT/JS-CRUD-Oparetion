@@ -41,7 +41,7 @@ function subFunction() {
   row.appendChild(td3);
 
   const td4 = document.createElement("td");
-  td4.appendChild(edit, del);
+  td4.appendChild(edit);
   row.appendChild(td4);
 
   document.getElementById("table").appendChild(row);
