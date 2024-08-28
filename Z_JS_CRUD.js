@@ -1,11 +1,30 @@
 // Its a Global VERiable
-var row = null;
+let row = null;
+let msg = document.getElementById("msg");
+let alertBox = document.getElementById("alert-box");
 // JS CRUD OPARETIONNNNNNN
 
 function subFunction() {
   var dataEntered = retrieveData();
   var readData = readinglocStorage(dataEntered);
-  insert(readData);
+
+  if (dataEntered == false) {
+    msg.innerHTML = "Pelese Fill The Form";
+    alertBox.classList.add("d-block", "alert-warning");
+    alertBox.classList.remove("d-none", "alert-success");
+  } else {
+    if (row == null) {
+      insert(readData);
+      msg.innerHTML = "Form Submitted";
+      alertBox.classList.add("d-block", "alert-success");
+      alertBox.classList.remove("d-none", "alert-warning");
+    } else {
+      update();
+      msg.innerHTML = "Form  Data Updated";
+      alertBox.classList.add("d-block", "alert-success");
+      alertBox.classList.remove("d-none", "alert-warning", "alert-danger");
+    }
+  }
   document.getElementById("form").reset();
 }
 
@@ -18,7 +37,13 @@ function retrieveData() {
   const regNumber = document.getElementById("regNumber").value;
 
   let arr = [fName, lName, rollNumber, regNumber];
-  return arr; /* Array te return korte hne */
+  if (arr.includes("")) {
+    return false;
+  } else if (fName.length == 2) {
+    return false;
+  } else {
+    return arr;
+  }
 }
 // CRUD----READ
 function readinglocStorage(dataEntered) {
@@ -41,12 +66,14 @@ function readinglocStorage(dataEntered) {
 // insert VAlue to Table
 function insert(readData) {
   const table = document.getElementById("table");
-  const row = table.insertRow(0);
-  row.insertCell(0).innerHTML = readData[0] + " " + readData[1];
-  row.insertCell(1).innerHTML = readData[2];
-  row.insertCell(2).innerHTML = readData[3];
+  let i = table.rows.length;
+  let row = table.insertRow(i);
+  row.insertCell(0).innerHTML = readData[0];
+  row.insertCell(1).innerHTML = readData[1];
+  row.insertCell(2).innerHTML = readData[2];
+  row.insertCell(3).innerHTML = readData[3];
   row.insertCell(
-    3
+    4
   ).innerHTML = `<button onclick= edit(this)><i class="fa-regular fa-pen-to-square"></i></button>
   <button  onclick= remove(this)><i class="fa-solid fa-trash"></i></button>`;
 }
@@ -55,15 +82,17 @@ function insert(readData) {
 function edit(td) {
   row = td.parentElement.parentElement;
   document.getElementById("fName").value = row.cells[0].innerHTML;
-  document.getElementById("rollNumber").value = row.cells[1].innerHTML;
-  document.getElementById("regNumber").value = row.cells[2].innerHTML;
+  document.getElementById("lName").value = row.cells[1].innerHTML;
+  document.getElementById("rollNumber").value = row.cells[2].innerHTML;
+  document.getElementById("regNumber").value = row.cells[3].innerHTML;
 }
 // CRUD----UPDATE
 function update() {
-  row.cells[0].innerHTM = document.getElementById("fName").value;
-  row.cells[1].innerHTM = document.getElementById("lName").value;
-  row.cells[2].innerHTM = document.getElementById("rollNumber").value;
-  row.cells[3].innerHTM = document.getElementById("regNumber").value;
+  row.cells[0].innerHTML = document.getElementById("fName").value;
+  row.cells[1].innerHTML = document.getElementById("lName").value;
+  row.cells[2].innerHTML = document.getElementById("rollNumber").value;
+  row.cells[3].innerHTML = document.getElementById("regNumber").value;
+  row = null;
 }
 // CRUD----DELETE
 function remove(td) {
@@ -71,10 +100,9 @@ function remove(td) {
   if (ans == true) {
     row = td.parentElement.parentElement;
     document.getElementById("table").deleteRow(row.rowIndex - 1);
-
     // Alert box design
-    document.getElementById("msg").innerHTML = "Row successfully deleted";
-    document.getElementById("alert-box").classList.add("d-block");
-    document.getElementById("alert-box").classList.remove("d-none");
+    msg.innerHTML = "Row successfully deleted";
+    alertBox.classList.add("d-block", "alert-danger");
+    alertBox.classList.remove("d-none", "alert-success");
   }
 }
