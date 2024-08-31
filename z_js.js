@@ -2,6 +2,7 @@
 let row = null;
 let msg = document.getElementById("msg");
 let alertBox = document.getElementById("alert-box");
+let Books = [];
 // JS CRUD OPARETIONNNNNNN
 
 function subFunction() {
@@ -37,6 +38,7 @@ function retrieveData() {
   const regNumber = document.getElementById("regNumber").value;
 
   let arr = [fName, lName, rollNumber, regNumber];
+
   if (arr.includes("")) {
     return false;
   } else if (fName.length == 2) {
@@ -48,18 +50,28 @@ function retrieveData() {
 // CRUD----READ
 function readinglocStorage(dataEntered) {
   // storing Data in localStorage
-  let fName = localStorage.setItem("FirstName", dataEntered[0]);
-  let lName = localStorage.setItem("LastName", dataEntered[1]);
-  let roll = localStorage.setItem("RollNumber", dataEntered[2]);
-  let reg = localStorage.setItem("RegistationNumber", dataEntered[3]);
+  // let fName = localStorage.setItem("FirstName", dataEntered[0]);
+  // let lName = localStorage.setItem("LastName", dataEntered[1]);
+  // let roll = localStorage.setItem("RollNumber", dataEntered[2]);
+  // let reg = localStorage.setItem("RegistationNumber", dataEntered[3]);
 
-  // getting values from local  to Table
-  let fName2 = localStorage.getItem("FirstName", fName);
-  let lName2 = localStorage.getItem("LastName", lName);
-  let roll2 = localStorage.getItem("RollNumber", roll);
-  let reg2 = localStorage.getItem("RegistationNumber", reg);
+  // // getting values from local  to Table
+  // let fName2 = localStorage.getItem("FirstName", fName);
+  // let lName2 = localStorage.getItem("LastName", lName);
+  // let roll2 = localStorage.getItem("RollNumber", roll);
+  // let reg2 = localStorage.getItem("RegistationNumber", reg);
+
+  let fName2 = dataEntered[0];
+  let lName2 = dataEntered[1];
+  let roll2 = dataEntered[2];
+  let reg2 = dataEntered[3];
 
   let arr2 = [fName2, lName2, roll2, reg2];
+
+  let book = { fName2, lName2, roll2, reg2 };
+  Books.push(book);
+  localStorage.setItem("DBBooks", JSON.stringify(Books));
+
   return arr2;
 }
 // CRUD----INSERT
@@ -106,3 +118,22 @@ function remove(td) {
     alertBox.classList.remove("d-none", "alert-success");
   }
 }
+// Get DBBooks value from localStorage
+var DBBooks = JSON.parse(localStorage.getItem("DBBooks"));
+let tr = DBBooks.map((book, i) => {
+  return `<tr>
+      <td>${book.fName2}</td>
+      <td>${book.lName2}</td>
+      <td>${book.roll2}</td>
+      <td>${book.reg2}</td>
+      <td><button onclick= edit(this)><i class="fa-regular fa-pen-to-square"></i></button>
+  <button  onclick= remove(this)><i class="fa-solid fa-trash"></i></button></td>
+    </tr>`;
+});
+let rowsHtml = tr.join("");
+const tableBody = document.getElementById("tableBody");
+
+// Set the innerHTML of <tbody> to the concatenated rows HTML
+tableBody.innerHTML = rowsHtml;
+console.log("DBBooks", tr);
+console.log("DBBooks", DBBooks);
